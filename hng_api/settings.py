@@ -161,7 +161,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Profile API',
-    'DESCRIPTION': 'Your project description',
+    'DESCRIPTION': 'View your profile information along with a random cat fact.',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
