@@ -148,7 +148,7 @@ CORS_EXPOSE_HEADERS = [
 #   $env:My_EMAIL = 'you@example.com'
 MY_EMAIL = os.getenv('My_EMAIL', 'augustineokonkwo744@gmail.com')
 MY_NAME = "Okonkwo Maduabuchi Augustine"
-MY_STACK = "Backend, Django, DRF, Python,"
+MY_STACK = "Backend"
 
 # External API (CAT FACTS)
 EXTERNAL_API_URL = "https://catfact.ninja/fact"

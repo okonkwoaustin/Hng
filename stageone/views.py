@@ -8,30 +8,23 @@ from datetime import datetime, timezone
 
 
 class ProfileView(APIView):
-    def get_cat_fact(self, request):
+    def get_cat_fact(self):
         try:
             response = requests.get(
                 settings.EXTERNAL_API_URL, timeout=settings.EXTERNAL_API_TIMEOUT
             )
             response.raise_for_status()
-            return response.json()
+            return response.json().get("fact")
         except requests.RequestException:
             return None
 
     def get(self, request):
-        cat_fact_json = self.get_cat_fact(request)
-        if not cat_fact_json:
+        cat_fact = self.get_cat_fact()
+        if not cat_fact:
             return Response({"status": "error", "message": "Failed to fetch external fact"},
                              status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
-        # Extract a plain fact string
-        if isinstance(cat_fact_json, dict):
-            fact_text = cat_fact_json.get("fact") or cat_fact_json.get(
-                "message") or json.dumps(cat_fact_json)
-        else:
-            fact_text = str(cat_fact_json)
-
-        # RFC3339 UTC timestamp ending with 'Z'
+             
         current_time_utc = datetime.now(timezone.utc).replace(
             microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -43,7 +36,7 @@ class ProfileView(APIView):
                 "stack": getattr(settings, "MY_STACK", ""),
             },
             "timestamp": current_time_utc,
-            "fact": fact_text,
+            "fact": cat_fact,
         }
 
         return Response(profile_data, status=status.HTTP_200_OK, headers={"Content-Type": "application/json"})
