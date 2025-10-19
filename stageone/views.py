@@ -31,9 +31,9 @@ class ProfileView(APIView):
         profile_data = {
             "status": "success",
             "user": {
-                "email": getattr(settings, "MY_EMAIL", ""),
-                "name": getattr(settings, "MY_NAME", ""),
-                "stack": getattr(settings, "MY_STACK", ""),
+                "email": getattr(settings, "MY_EMAIL", "augustineokonkwo744@gmail.com"),
+                "name": getattr(settings, "MY_NAME", "Okonkwo Maduabuchi Augustine"),
+                "stack": getattr(settings, "MY_STACK", "Backend"),
             },
             "timestamp": current_time_utc,
             "fact": cat_fact,
